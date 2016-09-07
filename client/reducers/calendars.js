@@ -1,50 +1,130 @@
-import { NEXT_MONTH, PREV_MONTH } from '../actions/actionCreators'
+import {
+    NEXT_MONTH, 
+    PREV_MONTH, 
+    NEXT_YEAR, 
+    PREV_YEAR, 
+    USE_DAY } from '../actions/actionCreators'
+import { MONTH_NAMES } from '../constants'
 
 const initialDate = new Date()
 const initialYear = initialDate.getFullYear()
 const initialMonth = initialDate.getMonth()
 const initialDay = initialDate.getDay()
+const initCalendar = createCalendar(initialMonth, initialYear)
 
 const initialState = {
-    calendar: {
-        year: initialYear,
-        month: initialMonth,
-        day: initialDay
+    year: initialYear,
+    month: initialMonth,
+    day: initialDay,
+    calendar: initCalendar
+}
+
+function createCalendar(month, year) {
+    const numDays = computeNumberOfDaysInMonth(year, month);
+    const firstDay = computeFirstDayOfMonth(year, month);
+    return {
+        selectedDayOfMonth: 1,
+        numDays: numDays,
+        firstDay: firstDay,
+        month: month,
+        // monthStr: MONTH_NUM_TO_STRING[month],
+        year: year,
+        matrix: createMatrix(numDays, firstDay)
+    };
+}
+
+function computeNumberOfDaysInMonth (year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function computeFirstDayOfMonth (year, month) {
+  return new Date(year, month, 1).getDay();
+}
+
+function createMatrix (numDays, firstDay) {
+  var i = 0;
+  var firstRow = [];
+  var rows = [firstRow];
+
+  // Space out the first day along the first row
+  while (i < firstDay) {
+    firstRow.push(null);
+    i++;
+  }
+
+  // Fill out the remaining dates in row
+  var nextDay = 1;
+  while (i < 7) {
+    firstRow.push(nextDay++);
+    i++;
+  }
+
+  // Build remaining rows
+  while (nextDay <= numDays - 7) {
+    let nextRow = [];
+    rows.push(nextRow);
+    i = 0;
+    while (i < 7) {
+      nextRow.push(nextDay++);
+      i++;
     }
+  }
+
+  // Create last row and space out empty days
+  if (numDays - nextDay >= 0) {
+    let lastRow = [];
+    rows.push(lastRow);
+    i = 0;
+    while (nextDay <= numDays) { 
+      lastRow.push(nextDay++);
+      i++;
+    }
+    while (i < 7) {
+      lastRow.push(null);
+      i++;
+    }
+  }
+  return rows;
 }
 
 function calendar(state = initialState, action) {
-    let year = initialState.calendar.year
-    let month = initialState.calendar.month
+    let year = state.year
+    let month = state.month
+    let day = state.day
+    let calendar = state.calendar
     switch (action.type) {
         case NEXT_MONTH:
-            if ( month === 11) {
+            if ( month == 11) {
                 month = 0
                 year ++
             } else {
                 month ++
             }
-            return Object.assign({}, state.calendar, {
+            return Object.assign({}, state, {
                 year: year,
                 month: month,
-                monthName: monthNames[month]
+                day: day,
+                calendar: createCalendar(month, year)
             })
         case PREV_MONTH:
             if ( month == 0 ) {
                 month = 11
                 year --
             } else {
-                month ++
+                month --
             }
 
-            return Object.assign({}, state.calendar, {
+            return Object.assign({}, state, {
                 year: year,
                 month: month,
-                monthName: monthNames[month]
+                day: day,
+                calendar: createCalendar(month, year)
             })
-        default:
+        case USE_DAY:
             return state
+        default:
+            return state;
     }
 }
 
-export default calendar
+export default calendar;

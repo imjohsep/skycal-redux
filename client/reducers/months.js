@@ -5,6 +5,9 @@ function months(state = [], action) {
             
             // return updated state
             return state;
+        case 'DECREMENT_MONTH':
+
+            return state;
         default:
             return state;
     }

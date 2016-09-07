@@ -6,9 +6,10 @@ import Main from './Main';
 function mapStateToProps(state) {
     const date = new Date();
     return {
-        year: date.getFullYear(),
-        month: date.getMonth(),
-        day: date.getDate()
+        year: state.calendar.year,
+        month: state.calendar.month,
+        day: state.calendar.day,
+        calendar: state.calendar.calendar
     }
 }
 

@@ -15,7 +15,22 @@ export const MONTH_NUM_TO_STRING = {
     11: 'December'
 }
 
-export const DAYS_OF_THE_WEEK = [
+export const MONTH_NAMES = [
+    'January', 
+    'February', 
+    'March', 
+    'April', 
+    'May', 
+    'June', 
+    'July', 
+    'August', 
+    'September', 
+    'October', 
+    'November', 
+    'December'
+]
+
+export const DAY_NAMES = [
     'Sun',
     'Mon',
     'Tue',

@@ -5,6 +5,9 @@ function years(state = [], action) {
             
             // return updated state
             return state;
+        case 'DECREMENT_YEAR':
+            
+            return state;
         default:
             return state;
     }

@@ -1,15 +1,17 @@
 import React from 'react';
+import Week from './Week';
 
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-const Month = React.createClass({
+const Month = React.createClass({ 
     render() {
-        const currentMonth = this.props.month;
-        const monthName = {};
-        const currentMonthName = monthNames[this.props.month];
+        let nodes = this.props.calendar.matrix
+        var weekNodes = nodes.map(function (node, i) {
+            return (
+                <Week key={i} weekDays={node}/>
+            )
+        })
         return (
             <div>
-                {currentMonthName}
+                { weekNodes }
             </div>
         )
     }
