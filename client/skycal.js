@@ -9,7 +9,8 @@ import css from './styles/common.sass';
 import App from './components/App'; // *
 // import Main from './components/Main';
 import Calendar from './components/Calendar';
-import Day from './components/Day';
+// import Day from './components/Day';
+import EventList from './components/EventList';
 
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -21,7 +22,7 @@ const router = (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Calendar}></IndexRoute>
-        <Route path="/event/:dayId" component={Day}></Route>
+        <Route path="/upcoming" component={EventList} />
       </Route>
     </Router>
   </Provider>

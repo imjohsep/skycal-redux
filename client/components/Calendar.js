@@ -30,6 +30,4 @@ const Calendar = React.createClass({
     }
 });
 
-// {months.map((month, i) => <Month month={month} key={i} {...this.props} />)}
-
 export default Calendar;
