@@ -3,15 +3,15 @@ import Week from './Week';
 
 const Month = React.createClass({ 
     render() {
-        let nodes = this.props.calendar.matrix
-        var weekNodes = nodes.map(function (node, i) {
+        let calendarMatrix = this.props.calendar.matrix
+        var weeks = calendarMatrix.map((week, i) => {
             return (
-                <Week key={i} weekDays={node}/>
+                <Week key={i} week={week} {...this.props}/>
             )
         })
         return (
             <div>
-                { weekNodes }
+                { weeks }
             </div>
         )
     }

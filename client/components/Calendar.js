@@ -15,12 +15,12 @@ const Calendar = React.createClass({
             alignItems: 'center',
             flexDirection: 'column'
         }
-        let monthName = MONTH_NAMES[this.props.calendar.month]
+        let monthName = this.props.calendar.monthStr
         let year = this.props.calendar.year
         return (
             <div className="calendar-container" style={divStyle2}>
                 <div>{monthName} {year}</div>
-                <Month {...this.props}/>
+                <Month {...this.props} />
                 <div style={divStyle}>
                     <div onClick={boundPrevClick}>Prev Month</div>
                     <div onClick={boundNextClick}>Next Month</div>

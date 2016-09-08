@@ -1,13 +1,34 @@
-# Learn Redux
+## Installation
 
-A simple React + Redux implementation. This will be turned into a free video series once the app is totally fleshed out.
+Open up a new terminal tab and run `mongod`
 
-## Running
+**Installing Mongo**
+```
+brew update
+brew install mongodb
+sudo mkdir -p /data/db
+sudo chown -R $USER /data/db
+```
+**Start and Stop Mongodb**
+```
+brew services start mongodb
+brew services stop mongodb
+```
 
-First `npm install` to grab all the necessary dependencies. 
+**Import Data**
+```
+mongoimport --db skycal --collection events --type json --file ./models/seed/04-09-2016.json
+```
 
-Then run `npm start` and open <localhost:7770> in your browser.
+## Usage
+**Grab all of the application dependencies.**
+```
+npm install
+```
 
-## Production Build
+**Start the application in dev mode with hot-module-replacement**
+```
+npm start
+```
 
-Run `npm build` to create a distro folder and a bundle.js file.
+**Open <localhost:7770> in your browser.**

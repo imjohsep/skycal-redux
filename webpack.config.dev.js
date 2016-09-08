@@ -18,7 +18,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      // js
+      // JS
       {
         test: /\.js$/,
         loaders: ['babel'],
@@ -30,6 +30,7 @@ module.exports = {
         include: path.join(__dirname, 'client'),
         loader: 'style-loader!css-loader!stylus-loader'
       },
+      // SASS
       {
         test: /\.sass/,
         include: path.join(__dirname, 'client'),

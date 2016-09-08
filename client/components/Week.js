@@ -3,11 +3,10 @@ import Day from './Day';
 
 const Week = React.createClass({
     render() {
-        let weekNode = this.props.weekDays
-        
-        var dayNodes = weekNode.map(function (node, i) {
+        let week = this.props.week
+        var days = week.map((day, i) => {
             return (
-                <Day key={i} val={node}/>
+                <Day key={i} val={day} {...this.props}/>
             )
         })
         var divStyle = {
@@ -15,7 +14,7 @@ const Week = React.createClass({
         }
         return (
             <div style={divStyle}>
-                { dayNodes }
+                { days }
             </div>
         )
     }

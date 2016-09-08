@@ -9,7 +9,7 @@ import { MONTH_NAMES } from '../constants'
 const initialDate = new Date()
 const initialYear = initialDate.getFullYear()
 const initialMonth = initialDate.getMonth()
-const initialDay = initialDate.getDay()
+const initialDay = initialDate.getDate()
 const initCalendar = createCalendar(initialMonth, initialYear)
 
 const initialState = {
@@ -20,17 +20,19 @@ const initialState = {
 }
 
 function createCalendar(month, year) {
-    const numDays = computeNumberOfDaysInMonth(year, month);
-    const firstDay = computeFirstDayOfMonth(year, month);
+    const numDays = computeNumberOfDaysInMonth(year, month)
+    const firstDay = computeFirstDayOfMonth(year, month)
+    const matrix = createMatrix(numDays, firstDay)
+
     return {
         selectedDayOfMonth: 1,
         numDays: numDays,
         firstDay: firstDay,
         month: month,
-        // monthStr: MONTH_NUM_TO_STRING[month],
+        monthStr: MONTH_NAMES[month],
         year: year,
-        matrix: createMatrix(numDays, firstDay)
-    };
+        matrix: matrix
+    }
 }
 
 function computeNumberOfDaysInMonth (year, month) {
@@ -88,6 +90,7 @@ function createMatrix (numDays, firstDay) {
 }
 
 function calendar(state = initialState, action) {
+    console.log("init", initialState)
     let year = state.year
     let month = state.month
     let day = state.day
@@ -100,11 +103,13 @@ function calendar(state = initialState, action) {
             } else {
                 month ++
             }
+            calendar = createCalendar(month, year)
+
             return Object.assign({}, state, {
                 year: year,
                 month: month,
                 day: day,
-                calendar: createCalendar(month, year)
+                calendar: calendar
             })
         case PREV_MONTH:
             if ( month == 0 ) {

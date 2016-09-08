@@ -2,10 +2,20 @@ var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var dbConfig = require('./config')
+var mongoose = require('mongoose')
 
 var app = express();
-var compiler = webpack(config);
+require('./router')(app);
 
+/* Mongo */
+mongoose.connect(dbConfig.database)
+mongoose.connection.on('error', function () {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?')
+})
+
+/* Webpack Middleware */
+var compiler = webpack(config);
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
