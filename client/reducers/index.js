@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import calendar from './calendars';
+import calendar from 'calendars';
 
 const rootReducer = combineReducers({calendar, routing: routerReducer});
 

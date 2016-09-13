@@ -3,8 +3,8 @@ import {
     PREV_MONTH, 
     NEXT_YEAR, 
     PREV_YEAR, 
-    USE_DAY } from '../actions/actionCreators'
-import { MONTH_NAMES } from '../constants'
+    USE_DAY } from 'actions/actionCreators'
+import { MONTH_NAMES } from 'constants'
 
 const initialDate = new Date()
 const initialYear = initialDate.getFullYear()

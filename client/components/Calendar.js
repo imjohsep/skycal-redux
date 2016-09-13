@@ -1,16 +1,16 @@
 import React from 'react';
-import Month from './Month';
-import { MONTH_NAMES } from '../constants';
+import Month from 'Month';
+import { MONTH_NAMES } from 'constants';
 
 const Calendar = React.createClass({
     render() {
         let boundNextClick = this.props.nextMonth.bind();
         let boundPrevClick = this.props.prevMonth.bind();
-        let divStyle = {
+        const divStyle = {
             display: 'flex',
             flexDirection: 'row'
         }
-        let divStyle2 = {
+        const divStyle2 = {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column'

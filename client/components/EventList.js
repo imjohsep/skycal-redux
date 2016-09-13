@@ -1,9 +1,9 @@
 import React, {PropTypes, Component} from 'react'
 
-import Event from './Event.js'
+import Event from 'Event'
 import $ from 'jquery'
 // import '../styles/event-list.sass'
-import NavLink from './NavLink'
+import NavLink from 'NavLink'
 
 export default class EventList extends Component {
   constructor () {

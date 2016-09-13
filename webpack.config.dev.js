@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './client/skycal'
+    'containers/skycal'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -16,6 +16,14 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
+  resolve: {
+      modulesDirectories: [
+          'client/components',
+          'client/reducers',
+          'client',
+          'node_modules'
+      ]
+  },
   module: {
     loaders: [
       // JS

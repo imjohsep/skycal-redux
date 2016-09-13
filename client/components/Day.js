@@ -8,7 +8,6 @@ const Day = React.createClass({
         }
         var isActive;
         if (this.props.val == this.props.day) {
-            console.log(this.props)
             isActive = {
                 width: '20px',
                 backgroundColor: 'red'
