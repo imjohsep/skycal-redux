@@ -125,7 +125,14 @@ module.exports = function (app) {
 
         groupedEvents[key].push(event._id)
       })
-
+      
+      var count = 0
+      for (var k in groupedEvents) {
+          var c = Object.keys(groupedEvents[k]).length
+          count += c
+      }
+      groupedEvents['group_count'] = Object.keys(groupedEvents).length
+      groupedEvents['event_count'] = count
       res.send(groupedEvents)
     })
   })
