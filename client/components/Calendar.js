@@ -15,8 +15,8 @@ const Calendar = React.createClass({
             alignItems: 'center',
             flexDirection: 'column'
         }
-        let monthName = this.props.calendar.monthStr
-        let year = this.props.calendar.year
+        let monthName = this.props.data.monthStr
+        let year = this.props.data.year
         return (
             <div className="calendar-container" style={divStyle2}>
                 <div>{monthName} {year}</div>

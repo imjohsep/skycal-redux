@@ -1,9 +1,8 @@
 import {
-    NEXT_MONTH, 
-    PREV_MONTH, 
-    NEXT_YEAR, 
-    PREV_YEAR, 
-    USE_DAY } from 'actions/actionCreators'
+    NEXT_MONTH, PREV_MONTH, 
+    NEXT_YEAR, PREV_YEAR, 
+    USE_DAY
+} from 'actions/actionCreators'
 import { MONTH_NAMES } from 'constants'
 
 const initialDate = new Date()
@@ -16,7 +15,7 @@ const initialState = {
     year: initialYear,
     month: initialMonth,
     day: initialDay,
-    calendar: initCalendar
+    data: initCalendar
 }
 
 function createCalendar(month, year) {
@@ -94,7 +93,7 @@ function calendar(state = initialState, action) {
     let year = state.year
     let month = state.month
     let day = state.day
-    let calendar = state.calendar
+    let calendar = state.data
     switch (action.type) {
         case NEXT_MONTH:
             if ( month == 11) {
@@ -109,7 +108,7 @@ function calendar(state = initialState, action) {
                 year: year,
                 month: month,
                 day: day,
-                calendar: calendar
+                data: calendar
             })
         case PREV_MONTH:
             if ( month == 0 ) {
@@ -123,7 +122,7 @@ function calendar(state = initialState, action) {
                 year: year,
                 month: month,
                 day: day,
-                calendar: createCalendar(month, year)
+                data: createCalendar(month, year)
             })
         case USE_DAY:
             return state

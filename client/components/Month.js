@@ -3,7 +3,7 @@ import Week from 'Week';
 
 const Month = React.createClass({ 
     render() {
-        let calendarMatrix = this.props.calendar.matrix
+        let calendarMatrix = this.props.data.matrix
         var weeks = calendarMatrix.map((week, i) => {
             return (
                 <Week key={i} week={week} {...this.props}/>

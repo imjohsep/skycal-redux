@@ -9,7 +9,7 @@ function mapStateToProps(state) {
         year: state.calendar.year,
         month: state.calendar.month,
         day: state.calendar.day,
-        calendar: state.calendar.calendar
+        data: state.calendar.data
     }
 }
 
