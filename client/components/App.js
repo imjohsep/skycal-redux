@@ -1,7 +1,8 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actionCreators from 'actions/actionCreators';
-import Main from 'Main';
+import 'babel-polyfill'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actionCreators from 'actions/actionCreators'
+import Main from 'Main'
 
 function mapStateToProps(state) {
     const date = new Date();
@@ -9,14 +10,15 @@ function mapStateToProps(state) {
         year: state.calendar.year,
         month: state.calendar.month,
         day: state.calendar.day,
-        data: state.calendar.data
+        data: state.calendar.data,
+        events: state.events.eventsByMonth[0].items
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch);
+    return bindActionCreators(actionCreators, dispatch)
 }
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Main);
+const App = connect(mapStateToProps, mapDispatchToProps)(Main)
 
-export default App;
+export default App

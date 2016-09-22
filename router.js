@@ -131,8 +131,8 @@ module.exports = function (app) {
           var c = Object.keys(groupedEvents[k]).length
           count += c
       }
-      groupedEvents['group_count'] = Object.keys(groupedEvents).length
-      groupedEvents['event_count'] = count
+      // groupedEvents['group_count'] = Object.keys(groupedEvents).length
+      // groupedEvents['event_count'] = count
       res.send(groupedEvents)
     })
   })

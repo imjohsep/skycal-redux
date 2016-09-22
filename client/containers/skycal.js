@@ -21,8 +21,8 @@ const router = (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Calendar}></IndexRoute>
-        <Route path="/upcoming" component={EventList} />
+        <IndexRoute component={EventList}></IndexRoute>
+        <Route path="/calendar" component={Calendar} />
       </Route>
     </Router>
   </Provider>

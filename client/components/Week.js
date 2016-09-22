@@ -1,5 +1,5 @@
-import React from 'react';
-import Day from 'Day';
+import React from 'react'
+import Day from 'Day'
 
 const Week = React.createClass({
     render() {
@@ -18,6 +18,6 @@ const Week = React.createClass({
             </div>
         )
     }
-});
+})
 
 export default Week;

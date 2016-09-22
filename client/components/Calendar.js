@@ -1,6 +1,7 @@
-import React from 'react';
-import Month from 'Month';
-import { MONTH_NAMES } from 'constants';
+import React from 'react'
+import Month from 'Month'
+import Test from 'Test'
+import { MONTH_NAMES } from 'constants'
 
 const Calendar = React.createClass({
     render() {
@@ -17,6 +18,19 @@ const Calendar = React.createClass({
         }
         let monthName = this.props.data.monthStr
         let year = this.props.data.year
+        let events = this.props.events
+
+        // Temp Stuff
+        let eventNodes = Object.keys(events).map(function (dayKey) {
+            return events[dayKey].map(function(event) {
+                return (
+                    <Test key={event.uid} date={event.occurrence_at} description={event.description}>
+                        {event.occurrence_at} {event.description}
+                    </Test>
+                )
+            })
+        })
+
         return (
             <div className="calendar-container" style={divStyle2}>
                 <div>{monthName} {year}</div>
@@ -25,9 +39,10 @@ const Calendar = React.createClass({
                     <div onClick={boundPrevClick}>Prev Month</div>
                     <div onClick={boundNextClick}>Next Month</div>
                 </div>
+                {eventNodes}
             </div>
         )
     }
-});
+})
 
-export default Calendar;
+export default Calendar
