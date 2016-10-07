@@ -1,14 +1,8 @@
-import { 
-    createStore, 
-    compose, 
-    applyMiddleware 
-} from 'redux'
+import {createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
-
 import rootReducer from 'reducers/index'
-
 import { selectMonth, fetchEvents, fetchEventsIfNeeded } from 'actions/actionCreators'
 
 const defaultState = {}
@@ -19,7 +13,7 @@ const enhancers = compose(
 
 const store = createStore(
     rootReducer,
-    defaultState, 
+    defaultState,
     applyMiddleware(thunk)
 )
 
@@ -31,8 +25,5 @@ if(module.hot) {
         store.replaceReducer(nextRootReducer)
     })
 }
-
-
-store.dispatch(fetchEventsIfNeeded(0))
 
 export default store

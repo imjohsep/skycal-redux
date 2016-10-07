@@ -10,8 +10,8 @@ export default class EventList extends Component {
     super()
     this.state = {events: []}
   }
-
-  componentDidMount () {
+  
+  componentWillMount() {
     this.loadUpcomingEvents()
   }
 

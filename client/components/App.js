@@ -5,13 +5,13 @@ import * as actionCreators from 'actions/actionCreators'
 import Main from 'Main'
 
 function mapStateToProps(state) {
-    const date = new Date();
+    const date = new Date()
     return {
         year: state.calendar.year,
         month: state.calendar.month,
         day: state.calendar.day,
         data: state.calendar.data,
-        events: state.events.eventsByMonth[0].items
+        events: state.calendar.events
     }
 }
 

@@ -85,7 +85,7 @@ module.exports = function (app) {
   // Grouped Events for a single Month
   app.get('/api/events/grouped/:year/:month', function (req, res) {
     var start_date = new Date(req.params.year, req.params.month)
-    var end_date = new Date(req.params.year, req.params.month + 1, 0)
+    var end_date = new Date(req.params.year, parseInt(req.params.month) + 1, 0)
 
     Event.aggregate(
       {
@@ -126,11 +126,11 @@ module.exports = function (app) {
         groupedEvents[key].push(event._id)
       })
       
-      var count = 0
-      for (var k in groupedEvents) {
-          var c = Object.keys(groupedEvents[k]).length
-          count += c
-      }
+      // var count = 0
+      // for (var k in groupedEvents) {
+      //     var c = Object.keys(groupedEvents[k]).length
+      //     count += c
+      // }
       // groupedEvents['group_count'] = Object.keys(groupedEvents).length
       // groupedEvents['event_count'] = count
       res.send(groupedEvents)

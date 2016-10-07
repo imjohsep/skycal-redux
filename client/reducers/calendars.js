@@ -2,7 +2,7 @@ import { MONTH_NAMES } from 'constants'
 import {
     NEXT_MONTH, PREV_MONTH, 
     NEXT_YEAR, PREV_YEAR, 
-    SELECT_DAY
+    SELECT_DAY, RECEIVE_EVENTS
 } from 'actions/actionCreators'
 
 const initialDate = new Date()
@@ -18,7 +18,7 @@ const initialState = {
     data: initCalendar,
     isFetching: false,
     didInvalidate: false,
-    items: []
+    events: {}
 }
 
 function createCalendar(month, year) {
@@ -27,12 +27,12 @@ function createCalendar(month, year) {
     const matrix = createMatrix(numDays, firstDay)
 
     return {
+        year: year,
+        month: month,
         selectedDayOfMonth: 1,
         numDays: numDays,
         firstDay: firstDay,
-        month: month,
         monthStr: MONTH_NAMES[month],
-        year: year,
         matrix: matrix
     }
 }
@@ -105,13 +105,8 @@ function calendar(state = initialState, action) {
                 month ++
             }
             calendar = createCalendar(month, year)
+            return { ...state, year: year, month: month, day: day, data: calendar }
 
-            return Object.assign({}, state, {
-                year: year,
-                month: month,
-                day: day,
-                data: calendar
-            })
         case PREV_MONTH:
             if ( month == 0 ) {
                 month = 11
@@ -119,15 +114,14 @@ function calendar(state = initialState, action) {
             } else {
                 month --
             }
+            return { ...state, year: year, month: month, day: day, data: createCalendar(month, year)}
 
-            return Object.assign({}, state, {
-                year: year,
-                month: month,
-                day: day,
-                data: createCalendar(month, year)
-            })
         case SELECT_DAY:
             return state
+
+        case RECEIVE_EVENTS:
+            return { ...state, events: action.data }
+            
         default:
             return state
     }

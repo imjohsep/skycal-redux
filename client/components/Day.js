@@ -1,28 +1,36 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+import NavLink from 'NavLink'
 
-const Day = React.createClass({
+export default class Day extends Component {
+
+    constructor(props) {
+        super(props)
+    }
+
     render() {
-        let val = this.props.val
-        var divStyle = {
-            
+        let {day_value, day, has_events} = this.props
+        
+        var styles = {
+            width: '20px'
         }
-        var isActive;
-        if (this.props.val == this.props.day) {
-            isActive = {
-                width: '20px',
-                backgroundColor: 'red'
-            }
-        } else {
-            isActive = {
-                width: '20px'
-            }
-        } 
+
+        if (day_value == day) {
+            styles["backgroundColor"] = "red"
+        }
+        
+        if (has_events == true) {
+            styles["backgroundColor"] = "green"
+        }
+
         return (
-            <div style={isActive}>
-                {val}
+            <div style={styles}>
+                <NavLink to={`/${day_value}/events`} className="eventListComponent-link">{day_value}</NavLink>
             </div>
         )
     }
-});
+}
 
-export default Day;
+Day.propTypes = {
+    day_value: PropTypes.number,
+    has_events: PropTypes.bool
+}

@@ -82,38 +82,25 @@ export function receiveEvents(month, json) {
 export function fetchEvents(month) {
     return function (dispatch) {
         dispatch(requestEvents(month))
-        return fetch('http://localhost:7770/api/events/grouped/2016/0')
+        return fetch('http://localhost:7770/api/events/grouped/2016/'+month)
             .then(response => response.json())
             .then(json => dispatch(receiveEvents(month, json))
         )
     }
 }
 
-function shouldFetchEvents(state, month) {
-    const events = state.events.eventsByMonth[month]
-    if (!events) {
-        return true
-    } else if (events.isFetching) {
-        return false
-    } else {
-        return events.didInvalidate
+export function fetchNextMonth() {
+    return (dispatch, getState) => {
+        dispatch(nextMonth())
+        let { month } = getState().calendar
+        dispatch(fetchEvents(month))
     }
 }
 
-export function fetchEventsIfNeeded(month) {
-    
-    // Note that the function also receives getState()
-    // which lets you choose what to dispatch next.
-
-    // This is useful for avoiding a network request if
-    // a cached value is already available.
+export function fetchPrevMonth() {
     return (dispatch, getState) => {
-        if (shouldFetchEvents(getState(), month)) {
-            // Dispatch a thunk from thunk!
-            return dispatch(fetchEvents(month))
-        } else {
-            // Let the calling code know there's nothing to wait for.
-            return Promise.resolve()
-        }
+        dispatch(prevMonth())
+        let { month } = getState().calendar
+        dispatch(fetchEvents(month))
     }
 }

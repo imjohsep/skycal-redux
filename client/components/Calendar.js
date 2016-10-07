@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Month from 'Month'
 import Test from 'Test'
 import { MONTH_NAMES } from 'constants'
 
-const Calendar = React.createClass({
+export default class Calendar extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentWillMount() {
+        this.props.fetchEvents(this.props.month)
+    }
+
     render() {
-        let boundNextClick = this.props.nextMonth.bind();
-        let boundPrevClick = this.props.prevMonth.bind();
+        let boundNextClick = this.props.fetchNextMonth.bind()
+        let boundPrevClick = this.props.fetchPrevMonth.bind()
         const divStyle = {
             display: 'flex',
             flexDirection: 'row'
@@ -16,10 +24,13 @@ const Calendar = React.createClass({
             alignItems: 'center',
             flexDirection: 'column'
         }
+
         let monthName = this.props.data.monthStr
         let year = this.props.data.year
-        let events = this.props.events
 
+        // let events = this.props.events.eventsByMonth[this.props.month].items
+        let events = this.props.events
+        
         // Temp Stuff
         let eventNodes = Object.keys(events).map(function (dayKey) {
             return events[dayKey].map(function(event) {
@@ -39,10 +50,7 @@ const Calendar = React.createClass({
                     <div onClick={boundPrevClick}>Prev Month</div>
                     <div onClick={boundNextClick}>Next Month</div>
                 </div>
-                {eventNodes}
             </div>
         )
     }
-})
-
-export default Calendar
+}
