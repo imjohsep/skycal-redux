@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react'
 
 import Event from 'Event'
 import $ from 'jquery'
-import css from 'styles/EventList.sass'
+import '../styles/EventList.sass'
 import NavLink from 'NavLink'
 
 export default class EventList extends Component {
