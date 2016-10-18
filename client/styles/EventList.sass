@@ -2,6 +2,17 @@
 /////Event List Component/////
 /////////////////////////////
 @import common
+@import media
+
+.eventList-shortView
+	text-align: center
+	@include media(handhelds)
+		background-color: $background-mobile-header
+	h1
+		padding: 0 0 20px 0
+		@include media(handhelds)
+			padding: 80px 0 30px 0
+			margin: 0
 
 .eventListComponent-link
 	font-size: 24px
@@ -11,7 +22,7 @@
 		display: block
 		background: $main-container-background-mobile
 
-.eventList-shortView .eventItem
+.eventItem
 	text-align: left
 	@include media(except-handhelds)
 		margin-bottom: 24px

@@ -39,7 +39,7 @@ export default class EventList extends Component {
     })
 
     return (
-      <div className='eventListComponent'>
+      <div className='eventList-shortView'>
         {eventNodes}
         <hr className='desktopOnly' />
         <NavLink to="/calendar" className="eventListComponent-link">More Events</NavLink>
