@@ -24,10 +24,10 @@ export default class Calendar extends Component {
 
     render() {
         return (
-            <div className="calendar-container">
+            <div className="calendarContainer">
                 <div>{this.monthStr} {this.year}</div>
                 <Month {...this.props} />
-                <div className="month-container">
+                <div className="monthContainer">
                     <div onClick={this.fetchPrevMonth}>Prev Month</div>
                     <div onClick={this.fetchNextMonth}>Next Month</div>
                 </div>
