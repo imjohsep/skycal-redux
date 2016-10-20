@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Day from 'Day'
-
+import 'styles/week.sass'
 
 export default class Week extends Component {
 
@@ -19,13 +19,9 @@ export default class Week extends Component {
                 <Day key={i} day_value={day} has_events={has_events} {...this.props}/>
             )
         })
-
-        var divStyle = {
-            display: 'flex'
-        }
         
         return (
-            <div style={divStyle}>
+            <div className='week-container'>
                 { days }
             </div>
         )
