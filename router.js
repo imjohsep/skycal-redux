@@ -20,10 +20,27 @@ function groupEvents(events) {
   return grouping
 }
 
+
 /* Routes */
 
-
 module.exports = function (app) {
+  // Event
+  app.get('/api/event/:year/:month/:day', function (req, res) {
+    var start_range = new Date(req.params.year, req.params.month - 1, req.params.day)
+    var end_range = new Date(req.params.year, req.params.month - 1, req.params.day)
+    end_range.setDate(end_range.getDate() + 1)
+    Event.find({
+      occurrence_at: {
+        $gte: start_range, 
+        $lte: end_range
+      }})
+    .sort('occurrence_at')
+    .exec(function (err, events) {
+      if (err) res.send([])
+      res.send(events)
+    })
+  })
+
   // Events
   app.get('/api/events', function (req, res) {
     Event.find({}, function (err, events) {
@@ -37,7 +54,14 @@ module.exports = function (app) {
     var now = new Date()
     var end_range = new Date()
     end_range.setDate(end_range.getDate() + 7)
-    Event.find({occurrence_at: {$gte: now, $lte: end_range}}).sort('occurrence_at').limit(4).exec(function (err, events) {
+    Event.find({
+      occurrence_at: {
+        $gte: now, 
+        $lte: end_range
+      }})
+    .sort('occurrence_at')
+    .limit(4)
+    .exec(function (err, events) {
       if (err) res.send([])
       res.send(events)
     })
