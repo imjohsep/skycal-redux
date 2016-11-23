@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     
-    './client/skycal'
+    './client/containers/skycal'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -16,7 +16,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': "'production'"
+        'NODE_ENV': 'production'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -25,6 +25,14 @@ module.exports = {
       }
     })
   ],
+  resolve: {
+      modulesDirectories: [
+          'client/components',
+          'client/reducers',
+          'client',
+          'node_modules'
+      ]
+  },
   module: {
     loaders: [
     // js
@@ -33,12 +41,12 @@ module.exports = {
       loaders: ['babel'],
       include: path.join(__dirname, 'client')
     },
-    // CSS
-    { 
-      test: /\.styl$/, 
-      include: path.join(__dirname, 'client'),
-      loader: 'style-loader!css-loader!stylus-loader'
-    }
+    // SASS
+      {
+        test: /\.sass/,
+        include: path.join(__dirname, 'client'),
+        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+      }
     ]
   }
 };

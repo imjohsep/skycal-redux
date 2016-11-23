@@ -1,21 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { render } from 'react-dom'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
+import store, {history} from 'store'
 
-import { render } from 'react-dom';
-
-// Import css
-// import css from 'styles/common.sass';
-
-// Import Components
-import App from 'components/App'; // *
-// import Main from './components/Main';
-import Calendar from 'components/Calendar';
-// import Day from './components/Day';
-import EventList from 'components/EventList';
-
-// import react router deps
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
-import store, {history} from 'store';
+import App from 'components/App'
+import Calendar from 'components/Calendar'
+import EventList from 'components/EventList'
 
 const router = (
   <Provider store={store}>
