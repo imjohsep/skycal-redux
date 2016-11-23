@@ -9,22 +9,20 @@ export default class Day extends Component {
 
     render() {
         let {day_value, day, has_events} = this.props
-        
-        var styles = {
-            width: '20px'
-        }
+
+        let dayClass = ""
 
         if (day_value == day) {
-            styles["backgroundColor"] = "red"
+            dayClass = "dayContainer--active"
         }
-        
+
         if (has_events == true) {
-            styles["backgroundColor"] = "green"
+            dayClass = "dayContainer--event"
         }
 
         return (
-            <div style={styles}>
-                <NavLink to={`/${day_value}/events`} className="eventListComponent-link">{day_value}</NavLink>
+            <div className={"dayContainer " + dayClass} >
+                <NavLink to={`/${day_value}/events`}>{day_value}</NavLink>
             </div>
         )
     }

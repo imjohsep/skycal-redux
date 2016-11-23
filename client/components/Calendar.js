@@ -24,13 +24,13 @@ export default class Calendar extends Component {
 
     render() {
         return (
-            <div className="calendar-container">
-                <div>{this.monthStr} {this.year}</div>
-                <Month {...this.props} />
-                <div className="month-container">
-                    <div onClick={this.fetchPrevMonth}>Prev Month</div>
-                    <div onClick={this.fetchNextMonth}>Next Month</div>
+            <div className="calendarContainer">
+                <h1>{this.monthStr} {this.year}</h1>
+                <div className="calendarNav">
+                    <div className="calendarNav-link" onClick={this.fetchPrevMonth}>Prev Month</div>
+                    <div className="calendarNav-link" onClick={this.fetchNextMonth}>Next Month</div>
                 </div>
+                <Month {...this.props} />
             </div>
         )
     }

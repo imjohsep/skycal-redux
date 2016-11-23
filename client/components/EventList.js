@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react'
 
 import Event from 'Event'
 import $ from 'jquery'
-// import '../styles/event-list.sass'
+import '../styles/EventList.sass'
 import NavLink from 'NavLink'
 
 export default class EventList extends Component {
@@ -10,7 +10,7 @@ export default class EventList extends Component {
     super()
     this.state = {events: []}
   }
-  
+
   componentWillMount() {
     this.loadUpcomingEvents()
   }
@@ -39,7 +39,8 @@ export default class EventList extends Component {
     })
 
     return (
-      <div className='eventListComponent'>
+      <div>
+        <h1>SkyCal</h1>
         {eventNodes}
         <hr className='desktopOnly' />
         <NavLink to="/calendar" className="eventListComponent-link">More Events</NavLink>
