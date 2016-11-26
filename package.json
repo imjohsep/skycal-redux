@@ -3,21 +3,37 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
-    "build:start": "node prodServer.js",
+    "build": "rimraf dist && better-npm-run build",
+    "build:start": "better-npm-run build:start",
     "test": "NODE_ENV=production mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "clean": "rimraf dist",
     "start": "node devServer.js",
-    "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
+    "start:prod": "better-npm-run start:prod"
+  },
+  "betterScripts": {
+    "build": {
+      "command": "webpack --config webpack.config.prod.js --progress --profile --colors",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:start": {
+      "command": "rimraf dist && better-npm-run build && node prodServer",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "start:prod": {
+      "command": "node prodServer"
+    }
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/imjohsep/skycal-redux"
   },
   "author": "Joseph Watters",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "http://skycalapp.herokuapp.com",
   "dependencies": {
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.0.4",
@@ -58,6 +74,7 @@
   "devDependencies": {
     "expect": "^1.18.0",
     "expect-jsx": "^2.5.1",
+    "html-webpack-plugin": "^2.24.1",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react-addons-test-utils": "^15.0.2",
