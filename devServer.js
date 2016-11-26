@@ -1,7 +1,9 @@
-var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config.dev');
+var path = require('path')
+var express = require('express')
+var webpack = require('webpack')
+var webpackMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+var config = require('./webpack.config.dev')
 var dbConfig = require('./config')
 var mongoose = require('mongoose')
 
@@ -15,17 +17,28 @@ mongoose.connection.on('error', function () {
 })
 
 /* Webpack Middleware */
-var compiler = webpack(config);
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+const compiler = webpack(config)
+const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  })
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(middleware)
+app.use(webpackHotMiddleware(compiler))
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+  // res.sendFile(path.join(__dirname, 'dist/index.html'));
+ res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')))
+ res.end()
+})
 
 app.listen(7770, 'localhost', function(err) {
   if (err) {

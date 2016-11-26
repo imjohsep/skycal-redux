@@ -82,9 +82,9 @@ export function receiveEvents(month, json) {
 export function fetchEvents(month) {
     return function (dispatch) {
         dispatch(requestEvents(month))
-        return fetch('http://localhost:7770/api/events/grouped/2016/'+month)
-            .then(response => response.json())
-            .then(json => dispatch(receiveEvents(month, json))
+        return fetch('/api/events/grouped/2016/'+month)
+            .then((response) => response.json())
+            .then((json) => dispatch(receiveEvents(month, json))
         )
     }
 }
