@@ -3,6 +3,8 @@
 /////////////////////////////
 @import common
 @import media
+@import icons
+@import iconDirective
 
 .eventListComponent-link
 	font-size: 24px
@@ -17,24 +19,45 @@
 .eventItem
 	text-align: left
 	@include media(except-handhelds)
+		min-width: 350px
 		margin-bottom: 24px
 
 	@include media(handhelds)
 		padding: 30px 20px
 		box-shadow: inset 0px -1px 5px 0px rgba(6,11,55,5)
 
-	&:nth-child(1)
-		@include media(handhelds)
+	@include media(handhelds)
+		&:nth-child(1)
 			background-color: #0B1D4B
 
-	&:nth-child(2)
-		@include media(handhelds)
+		&:nth-child(2)
 			background-color: #133869
 
-	&:nth-child(3)
-		@include media(handhelds)
+		&:nth-child(3)
 			background-color: #1D5D92
 
-	&:nth-child(4)
-		@include media(handhelds)
+		&:nth-child(4)
 			background-color: #2375AD
+
+////////////////
+/////Icons/////
+//////////////
++create-media(event-icon, (middle, standard, before))
+	no-op: 1
+
+$event-icon-list: 'moon', 'planet', 'star', 'shower'
+
+@each $event-icon-list in $event-icon-list
+	.eventImage--#{$event-icon-list}
+		+get-media(event-icon, '.svg-#{$event-icon-list}')
+		display: flex
+
+.eventItem-text
+	align-self: center
+	padding-left: 16px
+	font-size: 18px
+	p
+		margin: 0
+		&:first-child
+			font-weight: 400
+			margin-bottom: 8px
