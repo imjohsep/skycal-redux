@@ -1,7 +1,6 @@
 branches:
   only:
     - master
-    - deployment
 language: node_js
 node_js:
   - "5.1"
