@@ -72,12 +72,15 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "devDependencies": {
+    "babel-preset-stage-0": "^6.16.0",
     "expect": "^1.18.0",
     "expect-jsx": "^2.5.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
     "mocha": "^2.4.5",
     "node-sass": "^3.8.0",
     "react-addons-test-utils": "^15.0.2",
-    "sass-loader": "^4.0.0"
+    "sass-loader": "^4.0.0",
+    "stats-webpack-plugin": "^0.4.2"
   }
 }

@@ -1,28 +1,37 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var StatsPlugin = require('stats-webpack-plugin')
 
 module.exports = {
-  devtool: 'source-map',
   entry: [
-    
-    './client/containers/skycal'
+    path.join(__dirname, 'client/containers/skycal.js')
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name]-[hash].min.js',
+    publicPath: '/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': 'production'
-      }
+    new HtmlWebpackPlugin({
+      template: 'client/index.html',
+      inject: 'body',
+      filename: 'index.html'
     }),
+    // new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
       }
+    }),
+    new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ],
   resolve: {
@@ -35,13 +44,17 @@ module.exports = {
   },
   module: {
     loaders: [
-    // js
-    {
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'client')
-    },
-    // SASS
+      // JS
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        include: path.join(__dirname, 'client'),
+        query: {
+          'presets': ['es2015', 'stage-0', 'react']
+        }
+      },
+      // SASS
       {
         test: /\.sass/,
         include: path.join(__dirname, 'client'),
