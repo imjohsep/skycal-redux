@@ -12,11 +12,11 @@ export default class Day extends Component {
 
         let dayClass = ""
 
-        if (day_value === day) {
+        if (day_value == day) {
             dayClass = "dayContainer--active"
         }
 
-        if (has_events === true) {
+        if (has_events == true) {
             dayClass = "dayContainer--event"
         }
 
