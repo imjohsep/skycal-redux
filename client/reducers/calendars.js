@@ -27,13 +27,13 @@ function createCalendar(month, year) {
     const matrix = createMatrix(numDays, firstDay)
 
     return {
-        year: year,
-        month: month,
+        year,
+        month,
         selectedDayOfMonth: 1,
-        numDays: numDays,
-        firstDay: firstDay,
+        numDays,
+        firstDay,
         monthStr: MONTH_NAMES[month],
-        matrix: matrix
+        matrix
     }
 }
 
@@ -105,7 +105,13 @@ function calendar(state = initialState, action) {
                 month ++
             }
             calendar = createCalendar(month, year)
-            return { ...state, year: year, month: month, day: day, data: calendar }
+            return {
+                ...state, 
+                year, 
+                month,
+                day,
+                data: calendar
+            }
 
         case PREV_MONTH:
             if ( month == 0 ) {
@@ -114,13 +120,22 @@ function calendar(state = initialState, action) {
             } else {
                 month --
             }
-            return { ...state, year: year, month: month, day: day, data: createCalendar(month, year)}
+            return {
+                ...state,
+                year,
+                month,
+                day,
+                data: createCalendar(month, year)
+            }
 
         case SELECT_DAY:
             return state
 
         case RECEIVE_EVENTS:
-            return { ...state, events: action.data }
+            return {
+                ...state,
+                events: action.data
+            }
             
         default:
             return state
