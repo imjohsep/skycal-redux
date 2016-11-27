@@ -11,8 +11,13 @@
 	justify-content: space-between
 	width: 50%
 	margin-bottom: 10px
+
 	&-link:hover
 		text-decoration: underline
+
+%standard-day
+	border: 2px solid $action-color
+	border-radius: 50%
 
 .dayContainer
 	width: 50px
@@ -26,11 +31,18 @@
 	transition: background cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s
 
 	&--event
-		border: 2px solid $action-color
-		border-radius: 50%
+		@extend %standard-day
 
 		&:hover
 			background-color: $action-color
+
 			a
 				opacity: 1
 				color: #fff
+
+	&--active
+		@extend %standard-day
+		background-color: $action-color
+
+		a
+			color: #fff
