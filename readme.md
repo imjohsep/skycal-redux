@@ -17,7 +17,7 @@ brew services stop mongodb
 
 **Import Data**
 ```
-mongoimport --db skycal --collection events --type json --file ./models/seed/04-09-2016.json
+mongoimport --db skycal --collection events --type json --file ./models/seed/11-26-2016.json
 ```
 
 ## Usage

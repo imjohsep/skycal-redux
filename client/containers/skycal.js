@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import store, {history} from 'store'
 
-import App from 'components/App'
+import App from './app'
 import Calendar from 'components/Calendar'
 import EventList from 'components/EventList'
 
