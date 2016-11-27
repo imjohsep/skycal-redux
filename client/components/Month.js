@@ -1,5 +1,5 @@
-import React from 'react';
-import Week from 'Week';
+import React from 'react'
+import Week from 'Week'
 
 const Month = React.createClass({ 
     render() {
@@ -15,6 +15,6 @@ const Month = React.createClass({
             </div>
         )
     }
-});
+})
 
-export default Month;
+export default Month
