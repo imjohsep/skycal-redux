@@ -42,15 +42,18 @@
 ////////////////
 /////Icons/////
 //////////////
+
 +create-media(event-icon, (middle, standard, before))
 	no-op: 1
 
 $event-icon-list: 'moon', 'planet', 'star', 'shower'
 
+
+//Create breakpoint icon classes
 @each $event-icon-list in $event-icon-list
 	.eventImage--#{$event-icon-list}
-		+get-media(event-icon, '.svg-#{$event-icon-list}')
 		display: flex
+		+get-media(event-icon, '.svg-#{$event-icon-list}')
 
 .eventItem-text
 	align-self: center
