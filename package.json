@@ -7,8 +7,7 @@
     "build:start": "better-npm-run build:start",
     "test": "NODE_ENV=production mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "clean": "rimraf dist",
-    "start": "node devServer.js",
-    "start:prod": "better-npm-run start:prod"
+    "start": "node devServer.js"
   },
   "betterScripts": {
     "build": {
@@ -22,9 +21,6 @@
       "env": {
         "NODE_ENV": "production"
       }
-    },
-    "start:prod": {
-      "command": "node prodServer"
     }
   },
   "repository": {

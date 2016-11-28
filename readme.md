@@ -32,3 +32,9 @@ npm start
 ```
 
 **Open <localhost:7770> in your browser.**
+
+
+**Build and start the production build**
+```
+npm run build:start
+```
