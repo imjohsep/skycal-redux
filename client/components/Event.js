@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import { capitalize } from '../helpers';
+import { capitalize } from '../helpers'
 export default class Event extends Component {
   render () {
     return (

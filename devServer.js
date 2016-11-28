@@ -7,8 +7,8 @@ var config = require('./webpack.config.dev')
 var dbConfig = require('./config')
 var mongoose = require('mongoose')
 
-var app = express();
-require('./router')(app);
+var app = express()
+require('./router')(app)
 
 /* Mongo */
 mongoose.connect(dbConfig.database)
@@ -35,16 +35,15 @@ app.use(middleware)
 app.use(webpackHotMiddleware(compiler))
 
 app.get('*', function(req, res) {
-  // res.sendFile(path.join(__dirname, 'dist/index.html'));
  res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')))
  res.end()
 })
 
 app.listen(7770, 'localhost', function(err) {
   if (err) {
-    console.log(err);
-    return;
+    console.log(err)
+    return
   }
 
-  console.log('Listening at http://localhost:7770');
-});
+  console.log('Listening at http://localhost:7770')
+})
