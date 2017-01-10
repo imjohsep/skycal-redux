@@ -7,11 +7,14 @@ import store from 'store'
 
 function mapStateToProps(state) {
     const date = new Date()
+
     return {
         year: state.calendar.year,
         month: state.calendar.month,
         day: state.calendar.day,
         data: state.calendar.data,
+        tray: state.calendar.tray,
+        trayActive: state.calendar.trayActive,
         events: state.calendar.events
     }
 }

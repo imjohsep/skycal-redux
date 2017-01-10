@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
+export const TOGGLE_TRAY = 'TOGGLE_TRAY'
+
 export const NEXT_MONTH = 'NEXT_MONTH'
 export const PREV_MONTH = 'PREV_MONTH'
 export const NEXT_YEAR = 'NEXT_YEAR'
@@ -12,6 +14,26 @@ export const INVALIDATE_MONTH = 'INVALIDATE_MONTH'
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 
+export const REQUEST_DAY_EVENTS = 'REQUEST_DAY_EVENTS'
+export const RECEIVE_DAY_EVENTS = 'RECEIVE_DAY_EVENTS'
+
+
+// TRAY
+export function toggleTrayBool(trayActive) {
+    return {
+        type: TOGGLE_TRAY,
+        trayActive
+    }
+}
+
+export function toggleTray() {
+    return (dispatch, getState) => {
+        let { trayActive } = getState().calendar
+        dispatch(toggleTrayBool(trayActive))
+    }
+}
+
+// Calendar
 export function nextMonth(index) {
     return {
         type: NEXT_MONTH,
@@ -40,10 +62,19 @@ export function prevYear(index) {
     }
 }
 
-export function selectDay(index) {
-    return {
-        type: SELECT_DAY,
-        index
+export function fetchNextMonth() {
+    return (dispatch, getState) => {
+        dispatch(nextMonth())
+        let { month } = getState().calendar
+        dispatch(fetchEvents(month))
+    }
+}
+
+export function fetchPrevMonth() {
+    return (dispatch, getState) => {
+        dispatch(prevMonth())
+        let { month } = getState().calendar
+        dispatch(fetchEvents(month))
     }
 }
 
@@ -89,18 +120,29 @@ export function fetchEvents(month) {
     }
 }
 
-export function fetchNextMonth() {
-    return (dispatch, getState) => {
-        dispatch(nextMonth())
-        let { month } = getState().calendar
-        dispatch(fetchEvents(month))
+// EVENTS ON A GIVEN DAY
+
+export function requestDayEvents(){
+    return {
+        type: REQUEST_DAY_EVENTS,
     }
 }
 
-export function fetchPrevMonth() {
-    return (dispatch, getState) => {
-        dispatch(prevMonth())
-        let { month } = getState().calendar
-        dispatch(fetchEvents(month))
+export function receiveDayEvents(year, month, day, json) {
+    return {
+        type: RECEIVE_DAY_EVENTS,
+        year,
+        month,
+        day,
+        data: json
+    }
+}
+
+export function selectDay(year, month, day) {
+    return function(dispatch) {
+        dispatch(requestDayEvents())
+        fetch(`api/event/${year}/${month}/${day}`)
+        .then((response) => response.json())
+        .then((json) => dispatch(receiveDayEvents(year, month, day, json)))
     }
 }

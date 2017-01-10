@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Month from 'Month'
+import Tray from 'Tray'
 import { MONTH_NAMES } from 'constants'
 import 'styles/calendar.sass'
 
@@ -9,6 +10,7 @@ export default class Calendar extends Component {
         this.state = {monthStr: '', year: null, events: {}}
         this.fetchNextMonth = this.props.fetchNextMonth.bind(this)
         this.fetchPrevMonth = this.props.fetchPrevMonth.bind(this)
+        this.toggleTray = this.props.toggleTray.bind(this)
     }
 
     componentWillMount() {
@@ -22,14 +24,22 @@ export default class Calendar extends Component {
     }
 
     render() {
+        const windowStyle = {
+            display: 'flex'
+        }
+
         return (
-            <div className="calendarContainer">
-                <h1>{this.monthStr} {this.year}</h1>
-                <div className="calendarNav">
-                    <div className="calendarNav-link" onClick={this.fetchPrevMonth}>Prev Month</div>
-                    <div className="calendarNav-link" onClick={this.fetchNextMonth}>Next Month</div>
+            <div style={windowStyle}>
+                <div className="calendarNav-link" onClick={this.toggleTray}> &lt;&lt;&lt; </div>q
+                <Tray events={this.props.tray} trayActive={this.props.trayActive} />
+                <div className="calendarContainer">
+                    <h1>{this.monthStr} {this.year}</h1>
+                    <div className="calendarNav">
+                        <div className="calendarNav-link" onClick={this.fetchPrevMonth}>Prev Month</div>
+                        <div className="calendarNav-link" onClick={this.fetchNextMonth}>Next Month</div>
+                    </div>
+                    <Month {...this.props} />
                 </div>
-                <Month {...this.props} />
             </div>
         )
     }

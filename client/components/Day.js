@@ -5,6 +5,7 @@ export default class Day extends Component {
 
     constructor(props) {
         super(props)
+        this.selectDay = this.props.selectDay.bind(this)
     }
 
     render() {
@@ -21,8 +22,8 @@ export default class Day extends Component {
         }
 
         return (
-            <div className={`dayContainer ${dayClass}`}>
-                <NavLink to={`/${day_value}/events`}>{day_value}</NavLink>
+            <div className={`dayContainer ${dayClass} calendarNav-link`} onClick={() => this.selectDay(this.props.year, this.props.month, this.props.day_value)}>
+                <div>{day_value}</div>
             </div>
         )
     }

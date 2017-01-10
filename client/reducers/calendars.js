@@ -2,7 +2,9 @@ import { MONTH_NAMES } from 'constants'
 import {
     NEXT_MONTH, PREV_MONTH, 
     NEXT_YEAR, PREV_YEAR, 
-    SELECT_DAY, RECEIVE_EVENTS
+    SELECT_DAY, RECEIVE_EVENTS,
+    TOGGLE_TRAY, REQUEST_DAY_EVENTS,
+    RECEIVE_DAY_EVENTS
 } from 'actions/actionCreators'
 
 const initialDate = new Date()
@@ -18,6 +20,8 @@ const initialState = {
     data: initCalendar,
     isFetching: false,
     didInvalidate: false,
+    tray: [],
+    trayActive: false,
     events: {}
 }
 
@@ -92,10 +96,13 @@ function createMatrix (numDays, firstDay) {
 }
 
 function calendar(state = initialState, action) {
+    let trayActive = state.trayActive
     let year = state.year
     let month = state.month
     let day = state.day
     let calendar = state.data
+    let tray = state.tray
+
     switch (action.type) {
         case NEXT_MONTH:
             if ( month == 11) {
@@ -136,7 +143,27 @@ function calendar(state = initialState, action) {
                 ...state,
                 events: action.data
             }
-            
+
+        case REQUEST_DAY_EVENTS:
+            return {
+                ...state
+            }
+
+        case RECEIVE_DAY_EVENTS:
+            tray = action.data
+            return {
+                ...state,
+                tray
+            }
+
+        case TOGGLE_TRAY:
+            trayActive = !trayActive
+
+            return {
+                ...state,
+                trayActive
+            }
+
         default:
             return state
     }

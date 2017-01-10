@@ -26,9 +26,11 @@ function groupEvents(events) {
 module.exports = function (app) {
   // Event
   app.get('/api/event/:year/:month/:day', function (req, res) {
-    var start_range = new Date(req.params.year, req.params.month - 1, req.params.day)
-    var end_range = new Date(req.params.year, req.params.month - 1, req.params.day)
+    var start_range = new Date(Date.UTC(req.params.year, req.params.month, req.params.day))
+    var end_range = new Date(Date.UTC(req.params.year, req.params.month, req.params.day))
+
     end_range.setDate(end_range.getDate() + 1)
+
     Event.find({
       occurrence_at: {
         $gte: start_range, 
