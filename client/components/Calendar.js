@@ -30,7 +30,7 @@ export default class Calendar extends Component {
 
         return (
             <div style={windowStyle}>
-                <div className="calendarNav-link" onClick={this.toggleTray}> &lt;&lt;&lt; </div>q
+                <div className="calendarNav-link" onClick={this.toggleTray}>&lt;&lt;&lt;</div>
                 <Tray events={this.props.tray} trayActive={this.props.trayActive} />
                 <div className="calendarContainer">
                     <h1>{this.monthStr} {this.year}</h1>
