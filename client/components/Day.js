@@ -9,15 +9,23 @@ export default class Day extends Component {
     }
 
     render() {
-        let {day_value, day, has_events} = this.props
+        let {
+            year,
+            month,
+            day,
+            day_value,
+            has_events,
+            selected
+        } = this.props
 
         let dayClass = ''
+        let thisDay = year.toString().concat('-', month, '-', day_value)
 
-        if (day_value == day) {
+        if (selected == thisDay) {
             dayClass = 'dayContainer--active'
         }
 
-        if (has_events == true) {
+        if (has_events == true && selected != thisDay) {
             dayClass = 'dayContainer--event'
         }
 
