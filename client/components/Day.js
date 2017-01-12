@@ -29,10 +29,17 @@ export default class Day extends Component {
             dayClass = 'dayContainer--event'
         }
 
-        return (
-            <div className={`dayContainer ${dayClass} calendarNav-link`} onClick={() => this.selectDay(this.props.year, this.props.month, this.props.day_value)}>
+        let dae = <div className={`dayContainer ${dayClass} calendarNav-link`}></div>
+
+        if (day_value != null) {
+            dae = <div className={`dayContainer ${dayClass} calendarNav-link`}
+                onClick={() => this.selectDay(this.props.year, this.props.month, this.props.day_value)}>
                 <div>{day_value}</div>
             </div>
+        }
+
+        return (
+            <div>{dae}</div>
         )
     }
 }
