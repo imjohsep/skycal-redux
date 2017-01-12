@@ -15,6 +15,7 @@ export default class Calendar extends Component {
 
     componentWillMount() {
         this.props.fetchEvents(this.props.year, this.props.month)
+        this.props.selectDay(this.props.year, this.props.month, this.props.day)
     }
 
     componentWillReceiveProps(nextProps) {
