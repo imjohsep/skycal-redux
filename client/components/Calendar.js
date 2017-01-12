@@ -14,7 +14,8 @@ export default class Calendar extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchEvents(this.props.month)
+        this.props.fetchEvents(this.props.year, this.props.month)
+        this.props.selectDay(this.props.year, this.props.month, this.props.day)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -28,10 +29,14 @@ export default class Calendar extends Component {
             display: 'flex'
         }
 
+        const trayStyle = {
+            display: 'flex',
+            alignItems: 'center'
+        }
+
         return (
             <div style={windowStyle}>
-                <div className="calendarNav-link" onClick={this.toggleTray}>&lt;&lt;&lt;</div>
-                <Tray events={this.props.tray} trayActive={this.props.trayActive} />
+                <Tray style={trayStyle} events={this.props.tray}/>
                 <div className="calendarContainer">
                     <h1>{this.monthStr} {this.year}</h1>
                     <div className="calendarNav">

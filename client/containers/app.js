@@ -9,6 +9,7 @@ function mapStateToProps(state) {
     const date = new Date()
 
     return {
+        selected: state.calendar.selected,
         year: state.calendar.year,
         month: state.calendar.month,
         day: state.calendar.day,
