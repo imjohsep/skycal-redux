@@ -65,16 +65,16 @@ export function prevYear(index) {
 export function fetchNextMonth() {
     return (dispatch, getState) => {
         dispatch(nextMonth())
-        let { month } = getState().calendar
-        dispatch(fetchEvents(month))
+        let { year, month } = getState().calendar
+        dispatch(fetchEvents(year, month))
     }
 }
 
 export function fetchPrevMonth() {
     return (dispatch, getState) => {
         dispatch(prevMonth())
-        let { month } = getState().calendar
-        dispatch(fetchEvents(month))
+        let { year, month } = getState().calendar
+        dispatch(fetchEvents(year, month))
     }
 }
 
@@ -94,28 +94,30 @@ export function invalidateMonth(month) {
 }
 
 // EVENTS
-export function requestEvents(month) {
+export function requestEvents(year, month) {
     return {
         type: REQUEST_EVENTS,
-        month
+        month,
+        year
     }
 }
 
-export function receiveEvents(month, json) {
+export function receiveEvents(year, month, json) {
     return {
         type: RECEIVE_EVENTS,
         month,
+        year,
         data: json,
         receivedAt: Date.now()
     }
 }
 
-export function fetchEvents(month) {
+export function fetchEvents(year, month) {
     return function (dispatch) {
-        dispatch(requestEvents(month))
-        return fetch('/api/events/grouped/2016/'+month)
+        dispatch(requestEvents(year, month))
+        return fetch(`/api/events/grouped/${year}/${month}`)
             .then((response) => response.json())
-            .then((json) => dispatch(receiveEvents(month, json))
+            .then((json) => dispatch(receiveEvents(year, month, json))
         )
     }
 }

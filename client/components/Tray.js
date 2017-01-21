@@ -11,26 +11,25 @@ export default class Tray extends Component {
 
         var eventNodes = null
 
-        if (!this.props.trayActive) {
-            if (this.props.events != null) {
-                eventNodes = this.props.events.map((event) => {
-                    return (
-                        <Event
-                            key={event._id}
-                            date={event.occurrence_at}
-                            description={event.description}
-                            type={event.type}>
-                        {event.occurrence_at} {event.description}
-                        </Event>
-                    )
-                })
-            }
+        if (this.props.events.length > 0) {
+            eventNodes = this.props.events.map((event) => {
+                return (
+                    <Event
+                        key={event._id}
+                        date={event.occurrence_at}
+                        description={event.description}
+                        type={event.type}>
+                    {event.occurrence_at} {event.description}
+                    </Event>
+                )
+            })
+        } else {
+            eventNodes = <div>No Events Found</div>
         }
 
         const trayStyle = {
             alignSelf: 'center'
         }
-
 
         return(
             <div style={trayStyle}>

@@ -54,8 +54,11 @@ module.exports = function (app) {
   // Upcoming Events
   app.get('/api/events/upcoming', function (req, res) {
     var now = new Date()
+    now.setUTCHours(0,0,0,0)
     var end_range = new Date()
+    end_range.setUTCHours(0,0,0,0)
     end_range.setDate(end_range.getDate() + 7)
+
     Event.find({
       occurrence_at: {
         $gte: now, 
@@ -75,20 +78,20 @@ module.exports = function (app) {
       $group: {
         _id: {
           date: {
-            year: {$year: "$occurrence_at"},
-            month: {$month: "$occurrence_at"},
-            day: {$dayOfMonth: "$occurrence_at"}
+            year: {$year: '$occurrence_at'},
+            month: {$month: '$occurrence_at'},
+            day: {$dayOfMonth: '$occurrence_at'}
           },
-          occurrence_at: "$occurrence_at",
-          description: "$description",
-          uid: "$_id"
+          occurrence_at: '$occurrence_at',
+          description: '$description',
+          uid: '$_id'
         },
       }
     }, {
       $sort: {
-        "_id.date.year": 1,
-        "_id.date.month": 1,
-        "_id.date.day": 1,
+        '_id.date.year': 1,
+        '_id.date.month': 1,
+        '_id.date.day': 1,
       }
     }).exec(function (err, events) {
       if (err) res.send({'error': err})
@@ -103,7 +106,6 @@ module.exports = function (app) {
 
         groupedEvents[key].push(event._id)
       })
-
       res.send(groupedEvents)
     })
   })
@@ -122,20 +124,20 @@ module.exports = function (app) {
         $group: {
           _id: {
             date: {
-              year: {$year: "$occurrence_at"},
-              month: {$month: "$occurrence_at"},
-              day: {$dayOfMonth: "$occurrence_at"}
+              year: {$year: '$occurrence_at'},
+              month: {$month: '$occurrence_at'},
+              day: {$dayOfMonth: '$occurrence_at'}
             },
-            occurrence_at: "$occurrence_at",
-            description: "$description",
-            uid: "$_id"
+            occurrence_at: '$occurrence_at',
+            description: '$description',
+            uid: '$_id'
           },
         }
       }, {
         $sort: {
-          "_id.date.year": 1,
-          "_id.date.month": 1,
-          "_id.date.day": 1,
+          '_id.date.year': 1,
+          '_id.date.month': 1,
+          '_id.date.day': 1,
         }
     }
     ).exec(function (err, events) {
@@ -159,6 +161,7 @@ module.exports = function (app) {
       // }
       // groupedEvents['group_count'] = Object.keys(groupedEvents).length
       // groupedEvents['event_count'] = count
+
       res.send(groupedEvents)
     })
   })

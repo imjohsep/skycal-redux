@@ -11,12 +11,12 @@ export default class Week extends Component {
     render() {
         let week = this.props.week
         
-        var days = week.map((day, i) => {
+        var days = week.map((dayNode, i) => {
             let {month, year, events} = this.props
-            let builtDate = year.toString().concat('-', month+1, '-', day)
+            let builtDate = year.toString().concat('-', month+1, '-', dayNode)
             let has_events = events.hasOwnProperty(builtDate) 
             return (
-                <Day key={i} day_value={day} has_events={has_events} {...this.props}/>
+                <Day key={i} day_value={dayNode} has_events={has_events} {...this.props}/>
             )
         })
         

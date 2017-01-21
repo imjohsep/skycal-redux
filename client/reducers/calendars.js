@@ -14,6 +14,7 @@ const initialDay = initialDate.getDate()
 const initCalendar = createCalendar(initialMonth, initialYear)
 
 const initialState = {
+    selected: initialYear.toString().concat('-', initialMonth, '-', initialDay),
     year: initialYear,
     month: initialMonth,
     day: initialDay,
@@ -102,6 +103,7 @@ function calendar(state = initialState, action) {
     let day = state.day
     let calendar = state.data
     let tray = state.tray
+    let selected = state.selected
 
     switch (action.type) {
         case NEXT_MONTH:
@@ -151,9 +153,12 @@ function calendar(state = initialState, action) {
 
         case RECEIVE_DAY_EVENTS:
             tray = action.data
+            selected = action.year.toString().concat('-', action.month, '-', action.day)
+
             return {
                 ...state,
-                tray
+                tray,
+                selected
             }
 
         case TOGGLE_TRAY:
