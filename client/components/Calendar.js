@@ -25,19 +25,10 @@ export default class Calendar extends Component {
     }
 
     render() {
-        const windowStyle = {
-            display: 'flex'
-        }
-
-        const trayStyle = {
-            display: 'flex',
-            alignItems: 'center'
-        }
-
         return (
-            <div style={windowStyle}>
-                <Tray style={trayStyle} events={this.props.tray}/>
-                <div className="calendarContainer">
+            <div className="calendarContainer">
+                <Tray events={this.props.tray}/>
+                <div className="calendarContainer--calendar">
                     <h1>{this.monthStr} {this.year}</h1>
                     <div className="calendarNav">
                         <div className="calendarNav-link" onClick={this.fetchPrevMonth}>Prev Month</div>

@@ -3,7 +3,7 @@ import { capitalize } from '../helpers'
 export default class Event extends Component {
   render () {
     return (
-      <div className={'eventItem ' + 'eventImage--' + this.props.type}>
+      <div className={`eventItem eventImage--${this.props.type}`}>
       	<div className='eventItem-text'>
         	<p>{this.props.date}</p>
         	<p>{capitalize(this.props.description)}</p>

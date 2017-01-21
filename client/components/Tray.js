@@ -24,15 +24,11 @@ export default class Tray extends Component {
                 )
             })
         } else {
-            eventNodes = <div>No Events Found</div>
-        }
-
-        const trayStyle = {
-            alignSelf: 'center'
+            eventNodes = <div className="noEvents">No Events Found</div>
         }
 
         return(
-            <div style={trayStyle}>
+            <div className="calendarContainer--tray">
                 {eventNodes}
             </div>
         )
