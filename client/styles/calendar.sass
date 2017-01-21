@@ -1,35 +1,73 @@
 @import common
 
 .calendarContainer
-	display: flex
-	flex-direction: column
-	align-items: center
-	min-width: 580px
+	@include media(except-handhelds)
+		display: flex
+
+		&--calendar
+			display: flex
+			flex-direction: column
+			align-items: center
+			width: 600px
+
+		&--tray
+			display: flex
+			align-items: center
+			width: 340px
+
+	@include media(handhelds)
+		&--calendar
+			background-color: #0B1D4B
+			padding: 30px 0
+
+		&--tray
+			.eventItem:nth-child(1)
+				background-color: $action-color
+				box-shadow: none
+				padding: 30px 20px 20px 20px
+			.noEvents
+				padding: 30px 20px 20px 20px
+				text-align: center
+
+		h1
+			font-size: 22px
+			font-weight: 300
+
 
 .calendarNav
 	display: flex
 	justify-content: space-between
-	width: 50%
 	margin-bottom: 10px
+	@include media(except-handhelds)
+		width: 50%
 
+	@include media(handhelds)
+		padding: 0 30px
 	&-link:hover
 		text-decoration: underline
 		cursor: pointer
 
 %standard-day
-	border: 2px solid $action-color
 	border-radius: 50%
+	border: 2px solid $action-color
+	text-decoration: none
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
+		border: 1px solid $action-color
 
 .dayContainer
 	width: 50px
 	height: 50px
 	margin: 15px
+	cursor: pointer
 	font-size: 16px
 	box-sizing: border-box
 	display: flex
 	justify-content: center
 	align-items: center
 	transition: background cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s
+
+	&:hover
+		color: $action-color
 
 	&--event
 		@extend %standard-day
@@ -38,8 +76,11 @@
 			background-color: $action-color
 			opacity: 1
 			color: #fff
+			text-decoration: none
 
 	&--active
 		@extend %standard-day
 		background-color: $action-color
 		color: #fff
+		&:hover
+			color: #fff
