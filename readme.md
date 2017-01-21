@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/imjohsep/skycal-redux.svg?branch=master)](https://travis-ci.org/imjohsep/skycal-redux?branch=master)
+
+#Skycal Redux
+
 ## Installation
 
 Open up a new terminal tab and run `mongod`
