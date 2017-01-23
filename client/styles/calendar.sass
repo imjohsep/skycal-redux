@@ -1,8 +1,11 @@
 @import common
+@import icons
+@import iconDirective
 
 .calendarContainer
 	@include media(except-handhelds)
 		display: flex
+		height: 550px
 
 		&--calendar
 			display: flex
@@ -24,7 +27,7 @@
 			.eventItem:nth-child(1)
 				background-color: $action-color
 				box-shadow: none
-				padding: 30px 20px 20px 20px
+				padding: 40px 20px 35px 20px
 			.noEvents
 				padding: 30px 20px 20px 20px
 				text-align: center
@@ -33,19 +36,38 @@
 			font-size: 22px
 			font-weight: 300
 
++create-media(caret, (middle, standard, before))
+	no-op: 1
 
 .calendarNav
 	display: flex
 	justify-content: space-between
 	margin-bottom: 10px
 	@include media(except-handhelds)
-		width: 50%
+		width: 70%
 
 	@include media(handhelds)
 		padding: 0 30px
-	&-link:hover
-		text-decoration: underline
-		cursor: pointer
+
+.calendarNav--previous
+	@include media(except-handhelds)
+		transform: rotate(0.5turn) translateY(-24px)
+	@include media(handhelds)
+		transform: rotate(0.5turn) translateY(-16px)
+	cursor: pointer
+	+get-media(caret, '.svg-caret')
+
+.calendarNav--next
+	@include media(except-handhelds)
+		transform: translateY(24px)
+	@include media(handhelds)
+		transform: translateY(16px)
+	cursor: pointer
+	+get-media(caret, '.svg-caret')
+
+.weekContainer
+	display: flex
+	justify-content: center
 
 %standard-day
 	border-radius: 50%
@@ -53,13 +75,22 @@
 	text-decoration: none
 	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
 		border: 1px solid $action-color
+	@include media(handhelds)
+		border: 1px solid $action-color
 
 .dayContainer
-	width: 50px
-	height: 50px
-	margin: 15px
+	@include media(except-handhelds)
+		width: 50px
+		height: 50px
+		margin: 15px
+		font-size: 16px
+
+	@include media(handhelds)
+		width: 35px
+		height: 35px
+		margin: 10px
+		font-size: 16px
 	cursor: pointer
-	font-size: 16px
 	box-sizing: border-box
 	display: flex
 	justify-content: center

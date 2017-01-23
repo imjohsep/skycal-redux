@@ -29,10 +29,10 @@ export default class Calendar extends Component {
             <div className="calendarContainer">
                 <Tray events={this.props.tray}/>
                 <div className="calendarContainer--calendar">
-                    <h1>{this.monthStr} {this.year}</h1>
                     <div className="calendarNav">
-                        <div className="calendarNav-link" onClick={this.fetchPrevMonth}>Prev Month</div>
-                        <div className="calendarNav-link" onClick={this.fetchNextMonth}>Next Month</div>
+                        <div className="calendarNav--previous" onClick={this.fetchPrevMonth}>&nbsp;</div>
+                        <h1>{this.monthStr} {this.year}</h1>
+                        <div className="calendarNav--next" onClick={this.fetchNextMonth}>&nbsp;</div>
                     </div>
                     <Month {...this.props} />
                 </div>
