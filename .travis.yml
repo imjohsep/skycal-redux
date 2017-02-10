@@ -1,13 +1,14 @@
 branches:
   only:
-    - master
+  - master
 language: node_js
 node_js:
-  - "5.1"
-script: 
-  - npm run build
+- '5.1'
+script:
+- npm run build
 deploy:
   provider: heroku
-  api_key: "b94f507f-eb6a-4e01-9df9-43d3264a5c82"
   app: skycalapp
   skip_cleanup: true
+  api_key:
+    secure: Lxv7PhQ7YtmzJO2vedqoFaoakiwuqSXhXQcIZWBWlXZyRjCdzB1uybnTy+yKI/f/VWUv3ifs8gxJs/AJeuDkxZvj/BTlq51iemRUe3mwDMB3fWVC3zNHDYEu9qN1dLtnb3gRMeu2jjKrOWjPpztAIEEQ2NSYFlJpKRWq9TTqg6CAIJGn9ebm3POAbmBU2pTVtBNC2ikfCMsBfK4ehr6IN098FGmBrroZvL2J7NcOzgsfuJKTq66zNSn/REkI9ZnkbfLO0uLgB/ijahl70Ld0P/xlHvra6A33R9dgLxWKZVXm7VfAMyQYXOgn9lxVhtLlZi/Bff95anfBula9le7KIIakyZefhOktySMtS6KWFEKhA2ZXlpv35mVpMZk16HyiIaFjmFZdI7gwZJpwMy6VC756A+3YluanwWMY3mhYLYjcnvbzmAqST9deKQM389yWXc2C+vsMtslc5ySB+UJVxV1LEM1FBBxK9Eg7EV5kp4/sWInMAIjfgNz+CjBreGdvF4DpG4fbUkytI7yaWrxH9GUuOrb2jS7AK3tqtr4VWu3Gux2jPrmuPqA9UwFTtkeYBDjKrhmMH6b9rj2oSYd/KUwrDvJ5bpaUBNhXgLG8uiTSUjEnxTnSCtVRJn+eJAvKyWGGAM0zIf8+8Na/Ld7Xii5PCvXa2Wg3BN+xF7Mbg2U=
